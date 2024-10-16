@@ -27,7 +27,6 @@ class CreateDatabase extends Command
      */
     public function handle()
     {
-//        $arguments = $this->getArguments();
         $this->fire();
     }
 
@@ -40,9 +39,7 @@ class CreateDatabase extends Command
             return;
         }
         $this->info('Creating database: ' . $databaseName);
-
         DB::connection()->statement('CREATE DATABASE ' . $databaseName);
-//        DB::statement('CREATE DATABASE '.$databaseName);
     }
 
     protected function getArguments():array
