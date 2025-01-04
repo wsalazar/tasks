@@ -8,16 +8,13 @@ use App\Http\Resources\TaskResource;
 use App\Http\Resources\TaskSingleRecordResource;
 use App\Models\Task;
 use App\Repositories\TaskRepository;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Http\Request;
-//use Inertia\Response;
 use Illuminate\Http\Resources\Json\ResourceCollection;
-use Illuminate\Http\Response;
+use Illuminate\Http\Response as HttpResponse;
 use Inertia\Inertia;
+use Inertia\Response as InertiaResponse;
 
 class TaskController extends Controller
 {
-
     public function __construct(protected TaskRepository $taskRepository)
     {
 
@@ -26,15 +23,15 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): ResourceCollection
+    public function index(int $id): ResourceCollection
     {
-        return TaskResource::collection($this->taskRepository->getAll());
+        return TaskResource::collection($this->taskRepository->getUserTasks($id));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(TaskRequest $request): Response
+    public function store(TaskRequest $request): HttpResponse
     {
         $this->taskRepository->create($request->post());
         return response("Task was successfully created");
@@ -43,7 +40,7 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(int $taskId)
+    public function show(int $taskId): InertiaResponse
     {
         $taskResource = new TaskSingleRecordResource($this->taskRepository->fetch($taskId));
         return Inertia::render('Tasks', [

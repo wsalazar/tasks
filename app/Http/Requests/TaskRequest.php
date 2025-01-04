@@ -29,6 +29,8 @@ class TaskRequest extends FormRequest
             'task_address' => ['required','string', 'max:255'],
             'point_of_contact' => ['required','string', 'max:255'],
             'contact_number' => ['required','string', 'max:255'],
+            'user_id' => 'required|exists:users,id',
         ];
+        
     }
 }

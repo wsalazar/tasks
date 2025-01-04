@@ -15,12 +15,13 @@ class TaskRepository
             'task_address' => $post['task_address'],
             'point_of_contact' => $post['point_of_contact'],
             'contact_number' => $post['contact_number'],
+            'user_id' => $post['user_id']
         ]);
     }
 
-    public function getAll(): Collection
+    public function getUserTasks(int $id): Collection
     {
-        return Task::all();
+        return Task::where('user_id', $id)->get();
     }
 
     public function delete(Task $task): void

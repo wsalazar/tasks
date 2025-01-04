@@ -22,7 +22,7 @@
     },
     "dependencies": {
         "react-hook-form": "^7.53.0",
-        "react-router-dom": "^6.27.0",
+        "react-router-dom": "^7.1.1",
         "react-toastify": "^10.0.6"
     }
 }

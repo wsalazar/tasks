@@ -15,5 +15,6 @@ class Task extends Model
         'task_address',
         'point_of_contact',
         'contact_number',
+        'user_id'
     ];
 }
